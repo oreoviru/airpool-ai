@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-main: #070B14;
+    --bg-card: rgba(14, 21, 37, 0.75);
+    --bg-card-hover: rgba(22, 33, 58, 0.85);
+    --border-subtle: rgba(148, 163, 184, 0.12);
+    --border-accent: rgba(0, 245, 160, 0.25);
+    --border-cyan: rgba(0, 229, 255, 0.25);
+    
+    --accent-emerald: #00F5A0;
+    --accent-emerald-glow: rgba(0, 245, 160, 0.35);
+    --accent-cyan: #00E5FF;
+    --accent-cyan-glow: rgba(0, 229, 255, 0.35);
+    
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    background-image: 
+      radial-gradient(circle at 15% 10%, rgba(0, 229, 255, 0.07) 0%, transparent 40%),
+      radial-gradient(circle at 85% 25%, rgba(0, 245, 160, 0.06) 0%, transparent 45%),
+      radial-gradient(circle at 50% 80%, rgba(14, 165, 233, 0.05) 0%, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Glassmorphism custom styling */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05) inset;
+}
+
+.glass-panel-glow {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 245, 160, 0.25);
+  box-shadow: 0 10px 35px -10px rgba(0, 245, 160, 0.15), 0 0 1px 1px rgba(0, 245, 160, 0.15) inset;
+}
+
+.glass-panel-cyan {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  box-shadow: 0 10px 35px -10px rgba(0, 229, 255, 0.15), 0 0 1px 1px rgba(0, 229, 255, 0.15) inset;
+}
+
+/* Glow effects */
+.glow-emerald {
+  box-shadow: 0 0 25px -4px rgba(0, 245, 160, 0.45);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 25px -4px rgba(0, 229, 255, 0.45);
+}
+
+.text-gradient-emerald-cyan {
+  background: linear-gradient(135deg, #00F5A0 0%, #00E5FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-silver {
+  background: linear-gradient(180deg, #FFFFFF 0%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Radar pulse animation for flight awareness */
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 245, 160, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 245, 160, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 245, 160, 0);
+  }
+}
+
+.radar-ping {
+  animation: radar-pulse 2.2s infinite ease-in-out;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #070B14;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
 }
